@@ -1,0 +1,54 @@
+/* You can add global styles to this file, and also import other style files */
+.logo {
+  height: 3rem;
+}
+
+:root {
+  --navbar-color: #EEEAE4;
+}
+
+.outline {
+  border-bottom-width: 1px;
+  border-color: aqua;
+}
+
+.main-btn {
+  margin-top: 0.1rem;
+  background-color: #8ED9E9;
+  border-color: #8ED9E9;
+  border-style: solid;
+  border-radius: 15px;
+  padding: 4px;
+  width: 8rem;
+  color: #0b1117;
+}
+
+.custom-container-fluid {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/*Landscape 2*/
+@media (max-width: 1600px) {
+  .custom-container-fluid {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+/*Tablet*/
+@media (max-width: 1028px) {
+  .custom-container-fluid {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+}
+
+/*Phone*/
+@media (max-width: 694px) {
+  h1 {
+    padding-top: 7vh;
+    text-align: center;
+    font-size: 1.7rem;
+  }
+}
