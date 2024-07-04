@@ -1,0 +1,44 @@
+main {
+  background-color: #EAE7DE;
+}
+.login-image {
+  width: 60vw;
+}
+
+.custom-container {
+  display: flex;
+  align-content: flex-start;
+}
+
+.login-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+.welcome-text {
+  font-size: 17px;
+  font-weight: normal;
+  margin-top: 5vh;
+}
+
+
+.logo-login {
+  margin-top: 9vh;
+}
+
+/*Tablet*/
+@media (max-width: 1028px) {
+  .login-image {
+    display: none;
+  }
+}
+
+/*Phone*/
+@media (max-width: 694px) {
+  .login-image {
+    display: none;
+  }
+}

@@ -8,7 +8,6 @@ import { User } from './user/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
 import {AuthController} from "./auth/auth.controller";
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({

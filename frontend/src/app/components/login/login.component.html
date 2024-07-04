@@ -1,1 +1,24 @@
-<p>login works!</p>
+<main>
+  <div class="custom-container">
+  <img class="login-image" src="/assets/login-image.png">
+    <div class="login-section">
+      <div>
+        <img class="logo logo-login" src="assets/Teunsmuseum-logo.png" alt="Virtueel Museum Logo">
+        <h5 class="welcome-text">Welcome to Teuns Virtual Museum</h5>
+
+        <form (ngSubmit)="onSubmit()">
+          <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" [(ngModel)]="username" name="username" required>
+          </div>
+          <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" [(ngModel)]="password" name="password" required>
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
