@@ -22,7 +22,7 @@ export class AuthService {
 
         //Dit is als de vrouw achter de balie die je naam opzoekt in het registratiesboek
         const user = await this.userRepository.findOne({ where: { username } });
-
+        console.log(username, pass)
         //Als hij de naam gevonden checkt hij hier of het wachtwoord klopt. Zou je kunnen zien als controleren of het gezicht
         //op de ID hetzelfde is als in het echt. Als alles klopt, geeft hij het result zonder gevoelige informatie zoals wachtwoord
         if (user && await bcrypt.compare(pass, user.password)) {
