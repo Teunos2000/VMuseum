@@ -10,3 +10,18 @@ nav {
   font-family: Roboto, sans-serif;
 }
 
+
+.navbar-nav .nav-item .nav-link {
+  color: #fff; /* Default color */
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  color: #8ED9E9; /* Hover color */
+  border-radius: 5px;
+}
+
+.navbar-nav .nav-item .active-link {
+  color: #8ED9E9;
+  border-bottom: 3px solid #8ED9E9;
+}

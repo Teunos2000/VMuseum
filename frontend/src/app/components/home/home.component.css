@@ -1,0 +1,60 @@
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: #0b1117;
+}
+
+.hero {
+  position: relative;
+  background-image: url(/assets/teun_hero.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 90vh;
+}
+
+h1 {
+  padding-top: 12vh;
+  font-size: 2.8rem;
+  font-weight: normal;
+  /*Equal to 45px*/
+}
+
+p {
+  font-size: 1rem;
+  font-weight: lighter;
+}
+
+.description {
+  width: 30vw;
+}
+
+/*Tablet*/
+@media (max-width: 1028px) {
+  h1 {
+    padding-top: 4vh;
+    font-size: 1.7rem;
+  }
+  p {
+    font-size: 1rem;
+    font-weight: lighter;
+  }
+}
+
+/*Phone*/
+@media (max-width: 694px) {
+  h1 {
+    padding-top: 4vh;
+    text-align: center;
+    font-size: 1.7rem;
+  }
+  p {
+    font-size: 0.9rem;
+    font-weight: lighter;
+    text-align: center;
+  }
+  .description {
+    display: none;
+  }
+}
+
