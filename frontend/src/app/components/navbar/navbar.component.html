@@ -6,7 +6,7 @@
       <img class="logo" src="assets/Teunsmuseum-logo.png" alt="Virtueel Museum Logo">
     </a>
 
-  <!--Hamburger menu-->
+    <!--Hamburger menu-->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -26,12 +26,25 @@
         <li class="px-3 nav-item">
           <a class="nav-link" routerLink="/about" routerLinkActive="active-link">About</a>
         </li>
-        <li class="px-3 nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active-link">Login</a>
-        </li>
-        <li class="px-3 nav-item">
-          <button class="main-btn" routerLink="/register" routerLinkActive="active-link">Sign-Up</button>
-        </li>
+        <ng-container *ngIf="!authService.isAuthenticated(); else loggedInTemplate">
+          <li class="px-3 nav-item">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active-link">Login</a>
+          </li>
+          <li class="px-3 nav-item">
+            <button class="main-btn" routerLink="/register" routerLinkActive="active-link">Sign-Up</button>
+          </li>
+        </ng-container>
+        <ng-template #loggedInTemplate>
+          <li class="px-3 nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="profile-icon bi bi-person-circle"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+              <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+              <li><a class="dropdown-item" href="#" (click)="logout()">Sign Out</a></li>
+            </ul>
+          </li>
+        </ng-template>
       </ul>
     </div>
   </div>

@@ -15,6 +15,9 @@
             <label for="password">Password:</label>
             <input type="password" id="password" [(ngModel)]="password" name="password" required>
           </div>
+          <div *ngIf="error" class="error-message">
+            {{ error }}
+          </div>
           <button type="submit">Login</button>
         </form>
       </div>

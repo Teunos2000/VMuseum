@@ -6,10 +6,15 @@
   height: 5rem;
 }
 
+.profile-icon {
+  font-size: 1.5rem; /* Adjust the size as needed */
+  vertical-align: middle;
+  margin-bottom: -2rem; /* Adjust this value as needed */
+}
+
 nav {
   font-family: Roboto, sans-serif;
 }
-
 
 .navbar-nav .nav-item .nav-link {
   color: #0b1117;
