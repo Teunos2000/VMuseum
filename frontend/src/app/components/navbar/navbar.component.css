@@ -10,6 +10,16 @@
   font-size: 1.5rem; /* Adjust the size as needed */
   vertical-align: middle;
   margin-bottom: -2rem; /* Adjust this value as needed */
+  display: flex;
+  color: #0b1117;
+}
+
+.profile-icon:hover {
+  font-size: 1.5rem; /* Adjust the size as needed */
+  vertical-align: middle;
+  margin-bottom: -2rem; /* Adjust this value as needed */
+  display: grid;
+  color: #8ED9E9;
 }
 
 nav {

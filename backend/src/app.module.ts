@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
 import {AuthController} from "./auth/auth.controller";
+import {ScheduleModule} from "@nestjs/schedule";
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import {AuthController} from "./auth/auth.controller";
     }),
     UserModule,
     AuthModule,
+    ScheduleModule.forRoot() //For sending pings to db
   ],
   controllers: [AppController, AuthController],
   providers: [AppService],
