@@ -6,20 +6,20 @@
         <img class="logo logo-login" src="assets/Teunsmuseum-logo.png" alt="Virtueel Museum Logo">
         <h5 class="welcome-text">Welcome to Teuns Virtual Museum</h5>
 
-        <form (ngSubmit)="onSubmit()">
-          <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" [(ngModel)]="username" name="username" required>
+        <form class="form-margins" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <input type="text" id="username" [(ngModel)]="username" name="username" required class="line-input" placeholder="Username">
           </div>
-          <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" [(ngModel)]="password" name="password" required>
+          <div class="form-group">
+            <input type="password" id="password" [(ngModel)]="password" name="password" required class="line-input" placeholder="Password">
           </div>
           <div *ngIf="error" class="error-message">
             {{ error }}
           </div>
-          <button type="submit">Login</button>
+          <button class="main-btn my-4" type="submit">Login</button>
         </form>
+
+        <h5 class="register-text">New to Teuns Virtual Museum? <a class="custom-link" routerLink="/register"><u>Register here</u></a></h5>
       </div>
     </div>
   </div>

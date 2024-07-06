@@ -2,12 +2,17 @@ main {
   background-color: #EAE7DE;
 }
 .login-image {
-  width: 60vw;
+  width: 68vw;
+  height: 70%;
 }
 
 .custom-container {
   display: flex;
   align-content: flex-start;
+}
+
+.form-margins {
+  margin-top: 15vh;
 }
 
 .login-section {
@@ -21,7 +26,13 @@ main {
 .welcome-text {
   font-size: 17px;
   font-weight: normal;
-  margin-top: 5vh;
+  margin-top: 9vh;
+}
+
+.register-text {
+  font-size: 17px;
+  font-weight: normal;
+  margin-top: 25vh;
 }
 
 
@@ -29,8 +40,37 @@ main {
   margin-top: 9vh;
 }
 
+.line-input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #0b1117;
+  border-radius: 0;
+  padding: 5px 0;
+  width: 100%;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.line-input:focus {
+  outline: none;
+  border-bottom-color: #8ED9E9; /* Change color on focus */
+  box-shadow: none;
+}
+
+.line-input::placeholder {
+  color: #0b1117;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.custom-link {
+  color: black;
+  text-decoration: none;
+}
+
 /*Tablet*/
-@media (max-width: 1028px) {
+@media (max-width: 1165px) {
   .login-image {
     display: none;
   }
@@ -40,5 +80,14 @@ main {
 @media (max-width: 694px) {
   .login-image {
     display: none;
+  }
+}
+
+/*4K scherm*/
+@media (min-width: 2500px) {
+  .register-text {
+    font-size: 17px;
+    font-weight: normal;
+    margin-top: 35vh;
   }
 }
