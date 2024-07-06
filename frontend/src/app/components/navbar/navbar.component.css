@@ -28,7 +28,6 @@ nav {
 
 .navbar-nav .nav-item .nav-link {
   color: #0b1117;
-  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .navbar-nav .nav-item .nav-link:hover {
@@ -41,3 +40,8 @@ nav {
   color: #8ED9E9;
   border-bottom: 3px solid #8ED9E9;
 }
+
+.active-link2 {
+  color: black;
+}
+

@@ -18,8 +18,19 @@
   border-color: #8ED9E9;
   border-style: solid;
   border-radius: 15px;
-  padding: 4px;
+  padding: 6px;
   width: 8rem;
+  color: #0b1117;
+}
+
+.main-btn2 {
+  margin-top: 0.1rem;
+  background-color: #8ED9E9;
+  border-color: #8ED9E9;
+  border-style: solid;
+  border-radius: 15px;
+  padding: 9px;
+  width: 11rem;
   color: #0b1117;
 }
 

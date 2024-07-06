@@ -1,0 +1,35 @@
+<main>
+  <div class="custom-container">
+    <img class="login-image" src="/assets/login-image.png" alt="Login Image">
+    <div class="login-section">
+      <div>
+        <img class="logo logo-login" src="assets/Teunsmuseum-logo.png" alt="Virtueel Museum Logo">
+        <h5 class="welcome-text">Welcome to Teuns Virtual Museum</h5>
+
+        <form class="form-margins" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <input type="text" id="username" [(ngModel)]="username" name="username" required
+                   class="line-input" [class.empty-field]="isEmptyAndSubmitted(username)" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" [(ngModel)]="email" name="email" required
+                   class="line-input" [class.empty-field]="isEmptyAndSubmitted(email)" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <input type="password" id="password" [(ngModel)]="password" name="password" required
+                   class="line-input" [class.empty-field]="isEmptyAndSubmitted(password)" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <input type="password" id="repeatPassword" [(ngModel)]="repeatPassword" name="repeatPassword" required
+                   class="line-input" [class.empty-field]="isEmptyAndSubmitted(repeatPassword)" placeholder="Repeat Password">
+          </div>
+          <div *ngIf="error" class="error-message">
+            {{ error }}
+          </div>
+          <button class="main-btn2 my-4" type="submit">Create account</button>
+        </form>
+        <h5 class="register-text">Do you already have an account? <a class="custom-link" routerLink="/login"><u>Login here</u></a></h5>
+      </div>
+    </div>
+  </div>
+</main>
