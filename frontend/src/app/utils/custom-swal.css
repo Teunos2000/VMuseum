@@ -1,0 +1,16 @@
+.custom-swal-container {
+  font-family: 'Roboto', sans-serif;
+}
+
+.custom-swal-popup {
+  background-color: #EAE7DE !important;
+}
+
+.custom-confirm-button {
+  background-color: #8ED9E9 !important;
+  color: #0b1117 !important;
+}
+
+.custom-icon svg {
+  color: #8ED9E9 !important;
+}

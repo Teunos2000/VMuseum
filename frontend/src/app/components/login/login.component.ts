@@ -4,6 +4,7 @@ import {Router, RouterLink} from '@angular/router';
 import {FormsModule} from "@angular/forms";
 import {AuthService} from "../../auth/auth.service";
 import {NgIf} from "@angular/common";
+import {customSwal} from "../../utils/custom-swal";
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,13 @@ export class LoginComponent {
       next: (response: any) => {
         console.log('Login response:', response);  // Log the response
         localStorage.setItem('token', response.access_token);
+
+        customSwal({
+          icon: 'success',
+          title: 'Welcome back!',
+          text: 'Glad to see exploring the museum again!',
+          confirmButtonText: 'Let\'s Go!',
+        })
         this.router.navigate(['/']);
       },
       error: (error) => {

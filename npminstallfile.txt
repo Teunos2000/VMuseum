@@ -19,6 +19,9 @@ $ npm install bootstrap-icons
 jwt (front end):
 $ npm install @auth0/angular-jwt
 
+sweetalert2 (front end):
+$ npm install sweetalert2
+
 testing (front end)
 
 ng test

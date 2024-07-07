@@ -4,6 +4,9 @@ import {NgIf} from "@angular/common";
 import {AuthService} from "../../auth/auth.service";
 import {Router, RouterLink} from "@angular/router";
 import {UserService} from "../../auth/user.service";
+import Swal from 'sweetalert2';
+import { customSwal } from '../../utils/custom-swal';
+
 
 @Component({
   selector: 'app-register',
@@ -107,7 +110,18 @@ export class RegisterComponent {
         console.log('Login response:', response);
         localStorage.setItem('token', response.access_token);
         this.isLoading = false;
-        this.router.navigate(['/']); // Redirect to home page or dashboard
+
+        // Show success alert
+        customSwal({
+          icon: 'success',
+          title: 'Registration Successful!',
+          text: 'Welcome to Teuns Virtual Museum!',
+          confirmButtonText: 'Let\'s Go!',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/']);
+          }
+        });
       },
       error: (error) => {
         console.error('Auto-login failed', error);
