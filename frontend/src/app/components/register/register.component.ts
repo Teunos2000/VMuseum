@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {AuthService} from "../../auth/auth.service";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {UserService} from "../../auth/user.service";
 
 @Component({
@@ -11,7 +11,8 @@ import {UserService} from "../../auth/user.service";
   standalone: true,
   imports: [
     FormsModule,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   styleUrls: ['./register.component.css']
 })
@@ -73,7 +74,7 @@ export class RegisterComponent {
         if (response.available) {
           this.createUser();
         } else {
-          this.error = 'This username is already taken. Please choose a different one.';
+          this.error = 'Username taken';
           this.isLoading = false;
         }
       },

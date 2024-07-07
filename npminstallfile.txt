@@ -18,3 +18,7 @@ $ npm install bootstrap-icons
 
 jwt (front end):
 $ npm install @auth0/angular-jwt
+
+testing (front end)
+
+ng test
