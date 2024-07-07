@@ -30,6 +30,12 @@ export class UserService {
     return this.userRepository.save(newUser);
   }
 
+  async isUsernameTaken(username: string): Promise<boolean> {
+    const user = await this.userRepository.findOne({where: { username }});
+    //Makes undefined/null a boolean variable.
+    return !!user
+  }
+
   findAll() {
     console.log(this.userRepository);
     return this.userRepository.find();

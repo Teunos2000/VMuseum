@@ -12,6 +12,13 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+
+  @Get('check-username/:username')
+  async checkUsername(@Param('username') username: string) {
+    const isTaken = await this.userService.isUsernameTaken(username);
+    return { available: !isTaken };
+  }
+
   @Get()
   findAll() {
     return this.userService.findAll();

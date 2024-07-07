@@ -26,7 +26,9 @@
           <div *ngIf="error" class="error-message">
             {{ error }}
           </div>
-          <button class="main-btn2 my-4" type="submit">Create account</button>
+          <button class="main-btn2 my-4" type="submit" [disabled]="isLoading">
+            {{ isLoading ? 'Creating account...' : 'Create account' }}
+          </button>
         </form>
         <h5 class="register-text">Do you already have an account? <a class="custom-link" routerLink="/login"><u>Login here</u></a></h5>
       </div>
