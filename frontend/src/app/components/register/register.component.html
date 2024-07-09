@@ -7,8 +7,13 @@
         <h5 class="welcome-text">Welcome to Teuns Virtual Museum</h5>
 
         <form class="form-margins" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <input type="file" (change)="onFileChange($event)" />
+          <div class="form-group profile-upload">
+            <input type="file" id="profilePicture" (change)="onFileChange($event)" accept="image/*" hidden>
+            <label for="profilePicture" class="profile-upload-label">
+              <div class="profile-preview" [style.backgroundImage]="profileImageUrl ? 'url(' + profileImageUrl + ')' : 'none'">
+                <span *ngIf="!profileImageUrl">Upload Profile Picture</span>
+              </div>
+            </label>
           </div>
           <div class="form-group">
             <input type="text" id="username" [(ngModel)]="username" name="username" required

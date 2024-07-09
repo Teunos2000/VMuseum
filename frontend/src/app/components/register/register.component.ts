@@ -28,6 +28,7 @@ export class RegisterComponent {
   submitted: boolean = false;
   isLoading: boolean = false;
   uploadForm: FormGroup;
+  profileImageUrl: string | null = null;
 
   constructor(
     private userService: UserService,
@@ -44,12 +45,14 @@ export class RegisterComponent {
     return this.submitted && field.trim() === '';
   }
 
-  onFileChange(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.uploadForm.patchValue({
-        profile: file,
-      });
+  onFileChange(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.profileImageUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -122,7 +125,7 @@ export class RegisterComponent {
         },
         error => {
           console.error('Error uploading profile picture', error);
-          this.error = 'Something went wrong uploading your profile picture';
+          this.error = 'Image not allowed over 2MB: JPG, JPEG, PNG';
           this.isLoading = false;
         }
       );
