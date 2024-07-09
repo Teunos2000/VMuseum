@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import {FormsModule} from "@angular/forms";
-import {NgIf} from "@angular/common";
-import {AuthService} from "../../auth/auth.service";
-import {Router, RouterLink} from "@angular/router";
-import {UserService} from "../../auth/user.service";
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
+import { AuthService } from '../../auth/auth.service';
+import { Router, RouterLink } from '@angular/router';
+import { UserService } from '../../auth/user.service';
 import Swal from 'sweetalert2';
 import { customSwal } from '../../utils/custom-swal';
-
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -23,17 +23,34 @@ export class RegisterComponent {
   username: string = '';
   email: string = '';
   password: string = '';
-  profilepicture: string = '';
-  rank: number = 1;
   repeatPassword: string = '';
   error: string = '';
   submitted: boolean = false;
   isLoading: boolean = false;
+  uploadForm: FormGroup;
 
-  constructor(private userService: UserService, private authService: AuthService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.uploadForm = this.fb.group({
+      profile: [null],
+    });
+  }
 
   isEmptyAndSubmitted(field: string): boolean {
     return this.submitted && field.trim() === '';
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.uploadForm.patchValue({
+        profile: file,
+      });
+    }
   }
 
   onSubmit() {
@@ -59,7 +76,7 @@ export class RegisterComponent {
     // Check if password meets requirements
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{4,}$/;
     if (!passwordRegex.test(this.password)) {
-      this.error = 'Password must be at least 4 characters long.';
+      this.error = 'Password must be at least 4 characters long and contain at least one uppercase letter and one number.';
       this.isLoading = false;
       return;
     }
@@ -75,7 +92,7 @@ export class RegisterComponent {
     this.userService.checkUsernameAvailability(this.username).subscribe(
       response => {
         if (response.available) {
-          this.createUser();
+          this.uploadProfilePicture();
         } else {
           this.error = 'Username taken';
           this.isLoading = false;
@@ -89,8 +106,34 @@ export class RegisterComponent {
     );
   }
 
-  private createUser() {
-    this.userService.createUser(this.username, this.password, this.email, this.profilepicture, this.rank)
+  private uploadProfilePicture() {
+    const profileControl = this.uploadForm.get('profile');
+    if (profileControl && profileControl.value) {
+      const file = profileControl.value;
+      this.userService.uploadProfilePicture(file).subscribe(
+        response => {
+          console.log('Upload successful', response);
+          if (response && response.filePath) {
+            this.createUser(response.filePath);
+          } else {
+            this.error = 'Failed to get file path from server';
+            this.isLoading = false;
+          }
+        },
+        error => {
+          console.error('Error uploading profile picture', error);
+          this.error = 'Something went wrong uploading your profile picture';
+          this.isLoading = false;
+        }
+      );
+    } else {
+      this.error = 'Profile picture is required.';
+      this.isLoading = false;
+    }
+  }
+
+  private createUser(profilePicturePath: string) {
+    this.userService.createUser(this.username, this.password, this.email, profilePicturePath, 1)
       .subscribe(
         response => {
           console.log('User created successfully', response);

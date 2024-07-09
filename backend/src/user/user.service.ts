@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable, NotFoundException} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import {InjectRepository} from "@nestjs/typeorm";
@@ -51,5 +51,21 @@ export class UserService {
 
   remove(id: number) {
     return this.userRepository.delete(id);
+  }
+
+  async updateProfilePicture(username: string, profilePicture: string) {
+    const profilePictureUrl = `/uploads/${profilePicture}`;
+    const updateResult = await this.userRepository.update({ username }, { profilepicture: profilePictureUrl });
+
+    if (updateResult.affected === 0) {
+      throw new NotFoundException(`User with username ${username} not found`);
+    }
+
+    const updatedUser = await this.userRepository.findOne({ where: { username } });
+    if (!updatedUser) {
+      throw new NotFoundException(`User with username ${username} not found after update`);
+    }
+
+    return updatedUser;
   }
 }

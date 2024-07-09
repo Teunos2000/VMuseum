@@ -17,4 +17,10 @@ export class UserService {
   checkUsernameAvailability(username: string): Observable<{available: boolean}> {
     return this.http.get<{available: boolean}>(`${this.apiUrl}/check-username/${username}`);
   }
+
+  uploadProfilePicture(file: File): Observable<{ filePath: string }> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<{ filePath: string }>(`${this.apiUrl}/upload`, formData);
+  }
 }

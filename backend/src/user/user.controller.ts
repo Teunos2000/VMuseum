@@ -1,7 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  UploadedFile,
+  BadRequestException,
+  InternalServerErrorException, NotFoundException
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
+import {FileInterceptor} from "@nestjs/platform-express";
 
 @Controller('User')
 export class UserController {
@@ -37,5 +52,36 @@ export class UserController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
+  }
+
+  @Post('upload')
+  @UseInterceptors(
+      FileInterceptor('file', {
+        storage: diskStorage({
+          destination: './uploads',
+          filename: (req, file, cb) => {
+            const randomName = Array(32)
+                .fill(null)
+                .map(() => Math.round(Math.random() * 16).toString(16))
+                .join('');
+            cb(null, `${randomName}${extname(file.originalname)}`);
+          },
+        }),
+        fileFilter: (req, file, cb) => {
+          if (!file.mimetype.match(/\/(jpg|jpeg|png)$/)) {
+            cb(new BadRequestException('Only JPG, JPEG, and PNG files are allowed!'), false);
+          } else {
+            cb(null, true);
+          }
+        },
+        limits: { fileSize: 2 * 1024 * 1024 }, // 2MB
+      }),
+  )
+  async uploadProfilePicture(@UploadedFile() file: Express.Multer.File) {
+    if (!file) {
+      throw new BadRequestException('File is not provided or invalid.');
+    }
+    const filePath = `/uploads/${file.filename}`;
+    return { filePath };
   }
 }

@@ -10,7 +10,11 @@ typeorm, mysql(backend):
 $ npm install --save @nestjs/typeorm typeorm mysql2
 
 nestjs schedule (backend):
-npm install @nestjs/schedule
+$ npm install @nestjs/schedule
+
+mutler file upload (backend)
+$ npm i -D @types/multer
+$ npm install @nestjs/platform-express multer
 
 bootstrap, bootstrap icons (front end):
 $ npm install bootstrap
