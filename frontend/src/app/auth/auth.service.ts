@@ -22,6 +22,16 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
-    // this.router.navigate(['/']);
   }
+
+  getUserId(): number | null {
+    const token = localStorage.getItem('token');
+    if(token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      return decodedToken.sub;
+    }
+    return null;
+  }
+
+
 }

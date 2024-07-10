@@ -16,6 +16,10 @@ mutler file upload (backend)
 $ npm i -D @types/multer
 $ npm install @nestjs/platform-express multer
 
+serve static:
+npm install --save @nestjs/serve-static serve-static
+
+
 bootstrap, bootstrap icons (front end):
 $ npm install bootstrap
 $ npm install bootstrap-icons

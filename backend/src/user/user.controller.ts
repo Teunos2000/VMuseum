@@ -9,7 +9,7 @@ import {
   UseInterceptors,
   UploadedFile,
   BadRequestException,
-  InternalServerErrorException, NotFoundException
+  InternalServerErrorException, NotFoundException, UseGuards
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -17,6 +17,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import {FileInterceptor} from "@nestjs/platform-express";
+import {AuthGuard} from "@nestjs/passport";
 
 @Controller('User')
 export class UserController {
@@ -39,7 +40,9 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  //Guarded route with JWT
   @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
   }

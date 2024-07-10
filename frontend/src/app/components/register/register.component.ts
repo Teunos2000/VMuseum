@@ -51,6 +51,10 @@ export class RegisterComponent {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.profileImageUrl = e.target.result;
+        // Update the form control with the file
+        this.uploadForm.patchValue({
+          profile: file
+        });
       };
       reader.readAsDataURL(file);
     }
