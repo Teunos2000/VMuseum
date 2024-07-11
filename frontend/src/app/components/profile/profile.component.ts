@@ -39,9 +39,10 @@ export class ProfileComponent implements OnInit {
       this.userService.getUserProfile(userId).subscribe(
         (user) => {
           console.log('Full user object:', user);
+          const backendUrl = 'http://localhost:3000'; // Replace with your backend URL
           this.username = user.username;
           this.email = user.email;
-          this.profilepicture = user.profilepicture;
+          this.profilepicture = user.profilepicture ? `${backendUrl}${user.profilepicture}` : '';
           this.rank = user.rank;
         },
         (error) => {

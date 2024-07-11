@@ -8,6 +8,7 @@ import { User } from './user/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
 import {AuthController} from "./auth/auth.controller";
 import {ScheduleModule} from "@nestjs/schedule";
+import {StaticFilesModule} from "./static-files.module";
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import {ScheduleModule} from "@nestjs/schedule";
     }),
     UserModule,
     AuthModule,
+    StaticFilesModule,
     ScheduleModule.forRoot() //For sending pings to db
   ],
   controllers: [AppController, AuthController],
