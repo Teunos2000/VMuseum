@@ -1,30 +1,30 @@
-<main>
-  <div class="container-fluid custom-container-fluid">
+<main class="main">
+  <div class="py-5 container-fluid custom-container-fluid">
     <div class="row">
-
-      <div class="col-md-3 account-row">
+      <div class="col-md-3 account">
         <h5 class="text-center">Account</h5>
-        <div class="profile-picture">
-          <img [src]="profilepicture" alt="Profile Picture" *ngIf="profilepicture">
-          <img src="assets/default-profile.png" alt="Default Profile Picture" *ngIf="!profilepicture">
+        <div class="account__profile-picture">
+          <input type="file" id="profilePicture" (change)="onFileChange($event)" accept="image/*" hidden>
+          <label for="profilePicture" class="profile-upload-label">
+            <img [src]="profileImageUrl || profilepicture || 'assets/Ancient_greek_men.webp'" alt="Profile Picture">
+            <div class="overlay">
+              <span>Change Picture</span>
+            </div>
+          </label>
         </div>
-        <div class="profile-info">
-          <p><strong>Username:</strong> {{ username }}</p>
-          <p><strong>Email:</strong> {{ email }}</p>
+        <div class="account__info">
+          <p class="account__username">&#64;{{ username }}</p>
+          <p>{{ email }}</p>
         </div>
       </div>
-
-      <div class="col-md-6 collection-row">
+      <div class="col-md-6 collection">
         <h5 class="text-center">Collection</h5>
         <p>snadfjasn</p>
       </div>
-
-      <div class="col-md-3 activity-row">
+      <div class="col-md-3 activity">
         <h5 class="text-center">Activity</h5>
         <p>snadfjasn</p>
       </div>
-
     </div>
   </div>
 </main>
-

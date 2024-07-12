@@ -1,10 +1,67 @@
+.main {
+  background: #EAE7DE;
+}
+.custom-container-fluid {
+  height: 100lvh;
+}
+.account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.account__profile-picture {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-top: 4vh;
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
+}
 
-
-
-.profile-section {
+.account__profile-picture img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.account__profile-picture .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.account__profile-picture:hover .overlay {
+  opacity: 1;
+}
+
+.account__profile-picture .overlay span {
+  color: white;
+  font-size: 14px;
   text-align: center;
+}
+.account__info {
+  margin-top: 5vh;
+  text-align: center;
+}
+.account__username {
+  font-size: 22px;
+  font-weight: bold;
+}
+.collection, .activity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
