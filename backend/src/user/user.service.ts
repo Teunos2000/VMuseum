@@ -53,19 +53,15 @@ export class UserService {
     return this.userRepository.delete(id);
   }
 
-  async updateProfilePicture(username: string, profilePicture: string) {
-    const profilePictureUrl = `/uploads/${profilePicture}`;
-    const updateResult = await this.userRepository.update({ username }, { profilepicture: profilePictureUrl });
-
+  async updateProfilePicture(userId: number, profilePicture: string) {
+    const updateResult = await this.userRepository.update({ id: userId }, { profilepicture: profilePicture });
     if (updateResult.affected === 0) {
-      throw new NotFoundException(`User with username ${username} not found`);
+      throw new NotFoundException(`User with ID ${userId} not found`);
     }
-
-    const updatedUser = await this.userRepository.findOne({ where: { username } });
+    const updatedUser = await this.userRepository.findOne({ where: { id: userId } });
     if (!updatedUser) {
-      throw new NotFoundException(`User with username ${username} not found after update`);
+      throw new NotFoundException(`User with ID ${userId} not found after update`);
     }
-
     return updatedUser;
   }
 }

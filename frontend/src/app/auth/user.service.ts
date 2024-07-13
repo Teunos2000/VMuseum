@@ -18,10 +18,13 @@ export class UserService {
     return this.http.get<{available: boolean}>(`${this.apiUrl}/check-username/${username}`);
   }
 
-  uploadProfilePicture(file: File): Observable<{ filePath: string }> {
+  uploadProfilePicture(file: File, userId?: number): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<{ filePath: string }>(`${this.apiUrl}/upload`, formData);
+    if (userId) {
+      formData.append('userId', userId.toString());
+    }
+    return this.http.post(`${this.apiUrl}/upload`, formData);
   }
 
   //Haalt user profiel op, wanneer je deze aanroept, geef je een ID mee

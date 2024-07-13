@@ -80,11 +80,17 @@ export class UserController {
         limits: { fileSize: 2 * 1024 * 1024 }, // 2MB
       }),
   )
-  async uploadProfilePicture(@UploadedFile() file: Express.Multer.File) {
+  async uploadProfilePicture(@UploadedFile() file: Express.Multer.File, @Body('userId') userId?: string) {
     if (!file) {
       throw new BadRequestException('File is not provided or invalid.');
     }
     const filePath = `/uploads/${file.filename}`;
+
+    // If userId is provided, update the existing user's profile picture
+    if (userId) {
+      await this.userService.updateProfilePicture(parseInt(userId), filePath);
+    }
+
     return { filePath };
   }
 }

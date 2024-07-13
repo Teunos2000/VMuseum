@@ -149,7 +149,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
             circularCanvas.toBlob((blob) => {
               if (blob) {
-                const file = new File([blob], "cropped_profile.png", { type: "image/png" });
+                const file = new File([blob], "cropped_profile.png", {type: "image/png"});
                 this.uploadProfilePicture(file);
                 this.isCropping = false;
               }
@@ -166,13 +166,20 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   uploadProfilePicture(file: File): void {
-    this.userService.uploadProfilePicture(file).subscribe(
+    const userId = this.authService.getUserId();
+    if (!userId) {
+      console.error('No user ID found');
+      return;
+    }
+
+    this.userService.uploadProfilePicture(file, userId).subscribe(
       response => {
         console.log('Upload successful', response);
         if (response && response.filePath) {
           const backendUrl = 'http://localhost:3000';
           this.profileImageUrl = `${backendUrl}${response.filePath}`;
           this.profilepicture = this.profileImageUrl;
+          this.loadUserProfile(); // Reload user profile to get updated data
           customSwal({
             icon: 'success',
             title: 'Profile Picture Updated',
