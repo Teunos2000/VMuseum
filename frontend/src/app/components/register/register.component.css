@@ -1,6 +1,22 @@
 main {
   background-color: #EAE7DE;
 }
+
+.cropper-container {
+  max-width: 300px;
+  max-height: 300px;
+  margin: 0 auto;
+}
+
+.cropper-controls {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.cropper-controls button {
+  margin: 0 5px;
+}
+
 .login-image {
   width: 68vw;
   height: 70%;

@@ -3,14 +3,21 @@
     <div class="row">
       <div class="col-md-3 account">
         <h5 class="text-center">Account</h5>
-        <div class="account__profile-picture">
+        <div *ngIf="!isCropping" class="account__profile-picture">
           <input type="file" id="profilePicture" (change)="onFileChange($event)" accept="image/*" hidden>
           <label for="profilePicture" class="profile-upload-label">
-            <img class="profilepictureimage" [src]="profileImageUrl || 'assets/Ancient_greek_men.webp'" alt="Profile Picture">
+            <img [src]="profileImageUrl || profilepicture || 'assets/Ancient_greek_men.webp'" alt="Profile Picture">
             <div class="overlay">
               <span>Change Picture</span>
             </div>
           </label>
+        </div>
+        <div *ngIf="isCropping" class="cropper-container">
+          <img #image [src]="croppingImageUrl" alt="Image to crop">
+        </div>
+        <div *ngIf="isCropping" class="cropper-controls">
+          <button (click)="cropImage()">Save</button>
+          <button (click)="cancelCrop()">Cancel</button>
         </div>
         <div class="account__info">
           <p class="account__username">&#64;{{ username }}</p>

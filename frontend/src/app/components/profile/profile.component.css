@@ -2,12 +2,10 @@
   background: #EAE7DE;
   min-height: 100vh;
 }
-
 .custom-container-fluid {
   min-height: 100vh;
   padding: 5vh 0;
 }
-
 .account, .collection, .activity {
   display: flex;
   flex-direction: column;
@@ -15,28 +13,23 @@
   justify-content: flex-start;
   height: 100%;
 }
-
 .account__profile-picture {
-  background-color: white;
   position: relative;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
   border-radius: 50%;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .account__profile-picture img {
   width: 100%;
-  height: auto;
-  min-height: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
-
 }
-
 .account__profile-picture .overlay {
   position: absolute;
   top: 0;
@@ -49,12 +42,11 @@
   align-items: center;
   opacity: 0;
   transition: opacity 0.3s;
+  cursor: pointer;
 }
-
 .account__profile-picture:hover .overlay {
   opacity: 1;
 }
-
 .account__profile-picture .overlay span {
   color: white;
   font-size: 14px;
@@ -64,17 +56,26 @@
   margin-top: 3vh;
   text-align: center;
 }
-
 .account__username {
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
-
 h5 {
   margin-bottom: 2rem;
 }
-
+.cropper-container {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+.cropper-controls {
+  margin-top: 1rem;
+  text-align: center;
+}
+.cropper-controls button {
+  margin: 0 0.5rem;
+}
 @media (max-width: 768px) {
   .account__profile-picture {
     width: 120px;

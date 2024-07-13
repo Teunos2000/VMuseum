@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from "@angular/core";
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../auth/auth.service';
@@ -7,6 +7,7 @@ import { UserService } from '../../auth/user.service';
 import Swal from 'sweetalert2';
 import { customSwal } from '../../utils/custom-swal';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import Cropper from 'cropperjs';
 
 @Component({
   selector: 'app-register',
@@ -29,6 +30,11 @@ export class RegisterComponent {
   isLoading: boolean = false;
   uploadForm: FormGroup;
   profileImageUrl: string | null = null;
+  isCropping: boolean = false;
+  croppingImageUrl: string | null = null;
+
+  @ViewChild('image') imageElement: ElementRef | undefined;
+  private cropper: Cropper | undefined;
 
   constructor(
     private userService: UserService,
@@ -50,14 +56,75 @@ export class RegisterComponent {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.profileImageUrl = e.target.result;
-        // Update the form control with the file
-        this.uploadForm.patchValue({
-          profile: file
-        });
+        this.croppingImageUrl = e.target.result;
+        this.isCropping = true;
+        setTimeout(() => this.initCropper(), 0);
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  initCropper() {
+    if (this.cropper) {
+      this.cropper.destroy();
+    }
+    if (this.imageElement && this.imageElement.nativeElement) {
+      this.cropper = new Cropper(this.imageElement.nativeElement, {
+        aspectRatio: 1,
+        viewMode: 1,
+        dragMode: 'move',
+        cropBoxMovable: true,
+        cropBoxResizable: true,
+        toggleDragModeOnDblclick: false,
+        minCropBoxWidth: 200,
+        minCropBoxHeight: 200,
+      });
+    }
+  }
+
+  cropImage() {
+    if (this.cropper) {
+      const canvas = this.cropper.getCroppedCanvas({
+        width: 200,
+        height: 200,
+      });
+
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+
+          const circularCanvas = document.createElement('canvas');
+          circularCanvas.width = 200;
+          circularCanvas.height = 200;
+          const circularCtx = circularCanvas.getContext('2d');
+
+          if (circularCtx) {
+            circularCtx.beginPath();
+            circularCtx.arc(100, 100, 100, 0, Math.PI * 2);
+            circularCtx.clip();
+            circularCtx.drawImage(canvas, 0, 0, 200, 200);
+
+            this.profileImageUrl = circularCanvas.toDataURL('image/png');
+            circularCanvas.toBlob((blob) => {
+              if (blob) {
+                const file = new File([blob], "cropped_profile.png", { type: "image/png" });
+                this.uploadForm.patchValue({
+                  profile: file
+                });
+              }
+            }, 'image/png');
+          }
+        }
+      }
+    }
+    this.isCropping = false;
+  }
+
+  cancelCrop() {
+    this.isCropping = false;
+    this.croppingImageUrl = null;
   }
 
   onSubmit() {
@@ -83,7 +150,7 @@ export class RegisterComponent {
     // Check if password meets requirements
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{4,}$/;
     if (!passwordRegex.test(this.password)) {
-      this.error = 'Password must be at least 4 characters long and contain at least one uppercase letter and one number.';
+      this.error = 'Password must be 4 characters long. & contain number';
       this.isLoading = false;
       return;
     }
