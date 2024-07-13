@@ -6,7 +6,7 @@
         <div class="account__profile-picture">
           <input type="file" id="profilePicture" (change)="onFileChange($event)" accept="image/*" hidden>
           <label for="profilePicture" class="profile-upload-label">
-            <img [src]="profileImageUrl || profilepicture || 'assets/Ancient_greek_men.webp'" alt="Profile Picture">
+            <img class="profilepictureimage" [src]="profileImageUrl || 'assets/Ancient_greek_men.webp'" alt="Profile Picture">
             <div class="overlay">
               <span>Change Picture</span>
             </div>
