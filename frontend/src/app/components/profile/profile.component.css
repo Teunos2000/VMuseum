@@ -76,9 +76,60 @@ h5 {
 .cropper-controls button {
   margin: 0 0.5rem;
 }
+
+.line-input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #0b1117;
+  border-radius: 0;
+  padding: 5px 0;
+  width: 12vw;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.line-input:focus {
+  outline: none;
+  border-bottom-color: #8ED9E9;
+  box-shadow: none;
+}
+
+.line-input::placeholder {
+  color: #0b1117;
+}
+
+.profileforms {
+  width: 300px; /* Optional: Set the width of the form */
+  margin: 0 auto; /* Optional: Center the form on the page */
+}
+.profileforms form {
+  display: flex;
+  flex-direction: column;
+}
+.profileforms input.line-input {
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 16px;
+  width: 100%; /* Ensures the input takes up the full width of its container */
+  box-sizing: border-box; /* Ensures padding is included in the element's total width */
+}
+.profileforms button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submitbutton {
+  margin-top: 1vh;
+  margin-bottom: 5vh;
+}
+
 @media (max-width: 768px) {
   .account__profile-picture {
     width: 120px;
     height: 120px;
+  }
+
+  .line-input {
+    width: 60vw;
   }
 }

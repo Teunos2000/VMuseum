@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormsModule } from "@angular/forms";
 import { NgIf, NgOptimizedImage } from "@angular/common";
 import { RouterLink } from "@angular/router";
@@ -15,7 +15,8 @@ import Cropper from 'cropperjs';
     FormsModule,
     NgIf,
     RouterLink,
-    NgOptimizedImage
+    NgOptimizedImage,
+    ReactiveFormsModule
   ],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
@@ -25,9 +26,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   email: string = '';
   profilepicture: string = '';
   rank: number = 0;
-  uploadForm: FormGroup;
   profileImageUrl: string | null = null;
   croppingImageUrl: string | null = null;
+  newusername: string = '';
+  updateForm: FormGroup;
 
   @ViewChild('image') imageElement: ElementRef | undefined;
   private cropper: Cropper | undefined;
@@ -38,8 +40,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     private authService: AuthService,
     private fb: FormBuilder
   ) {
-    this.uploadForm = this.fb.group({
-      profile: [null],
+    this.updateForm = this.fb.group({
+      newUsername: ['', [Validators.minLength(4)]],
+      newPassword: ['', [Validators.pattern(/^(?=.*[A-Z])(?=.*\d).{4,}$/)]],
+      repeatPassword: ['']
     });
   }
 
@@ -108,6 +112,114 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     } else {
       console.error('No user ID found');
     }
+  }
+
+  onSubmit() {
+    if (this.updateForm.invalid) {
+      const passwordControl = this.updateForm.get('newPassword');
+      if (passwordControl?.invalid && passwordControl?.touched) {
+        if (passwordControl.errors?.['pattern']) {
+          customSwal({
+            icon: 'error',
+            title: 'Weak Password',
+            text: 'Password must be at least 4 characters long, include at least one uppercase letter and one number.',
+            confirmButtonText: 'OK',
+          });
+        }
+        return;
+      }
+
+      // Check for other form errors if needed
+      customSwal({
+        icon: 'error',
+        title: 'Invalid Form',
+        text: 'Please check your inputs and try again.',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
+
+    const userId = this.authService.getUserId();
+    if (!userId) {
+      console.error('No user ID found');
+      return;
+    }
+
+    const newUsername = this.updateForm.get('newUsername')?.value;
+    const newPassword = this.updateForm.get('newPassword')?.value;
+    const repeatPassword = this.updateForm.get('repeatPassword')?.value;
+
+    if (!newUsername && !newPassword) {
+      customSwal({
+        icon: 'info',
+        title: 'No Changes',
+        text: 'No changes were made to your profile.',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
+
+    if (newUsername) {
+      this.userService.checkUsernameAvailability(newUsername).subscribe(
+        response => {
+          if (response.available) {
+            this.updateProfile(userId, newUsername, newPassword, repeatPassword);
+          } else {
+            customSwal({
+              icon: 'error',
+              title: 'Username Taken',
+              text: 'This username is already taken. Please choose another.',
+              confirmButtonText: 'OK',
+            });
+          }
+        },
+        error => {
+          console.error('Error checking username availability', error);
+          customSwal({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while checking username availability.',
+            confirmButtonText: 'OK',
+          });
+        }
+      );
+    } else {
+      this.updateProfile(userId, newUsername, newPassword, repeatPassword);
+    }
+  }
+
+  private updateProfile(userId: number, newUsername: string, newPassword: string, repeatPassword: string) {
+    if (newPassword && newPassword !== repeatPassword) {
+      customSwal({
+        icon: 'error',
+        title: 'Password Mismatch',
+        text: 'The passwords do not match.',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
+
+    this.userService.updateUser(userId, newUsername, newPassword).subscribe(
+      response => {
+        customSwal({
+          icon: 'success',
+          title: 'Profile Updated',
+          text: 'Your profile has been updated successfully!',
+          confirmButtonText: 'OK',
+        });
+        this.loadUserProfile();
+        this.updateForm.reset();
+      },
+      error => {
+        console.error('Error updating profile', error);
+        customSwal({
+          icon: 'error',
+          title: 'Update Failed',
+          text: 'An error occurred while updating your profile.',
+          confirmButtonText: 'OK',
+        });
+      }
+    );
   }
 
   onFileChange(event: Event): void {

@@ -36,6 +36,16 @@
   color: #0b1117;
 }
 
+.adaptive-button {
+  background-color: #8ED9E9;
+  border-color: #8ED9E9;
+  border-style: solid;
+  border-radius: 15px;
+  width: 7rem;
+  padding: 9px;
+  color: #0b1117;
+}
+
 .custom-container-fluid {
   max-width: 1600px;
   margin: 0 auto;

@@ -16,13 +16,23 @@
           <img #image [src]="croppingImageUrl" alt="Image to crop">
         </div>
         <div *ngIf="isCropping" class="cropper-controls">
-          <button (click)="cropImage()">Save</button>
-          <button (click)="cancelCrop()">Cancel</button>
+            <button class="adaptive-button" (click)="cropImage()">Save</button>
+            <button class="adaptive-button" (click)="cancelCrop()">Cancel</button>
         </div>
         <div class="account__info">
           <p class="account__username">&#64;{{ username }}</p>
           <p>{{ email }}</p>
         </div>
+        <h6 class="pt-5 pb-2">Change password & username</h6>
+        <div class="profileforms">
+          <form class="d-flex justify-content-center align-items-center" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+            <input type="text" id="username" formControlName="newUsername" class="line-input" placeholder="New Username">
+            <input type="password" id="password" formControlName="newPassword" class="line-input" placeholder="New Password">
+            <input type="password" id="repeatPassword" formControlName="repeatPassword" class="line-input" placeholder="Repeat New Password">
+            <button class="main-btn2 submitbutton" type="submit">Update Profile</button>
+          </form>
+        </div>
+
       </div>
       <div class="col-md-6 collection">
         <h5 class="text-center">Collection</h5>
