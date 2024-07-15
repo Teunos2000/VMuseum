@@ -26,23 +26,24 @@
         <li class="px-3 nav-item">
           <a class="nav-link" routerLink="/about" routerLinkActive="active-link">About</a>
         </li>
-        <ng-container *ngIf="!authService.isAuthenticated(); else loggedInTemplate">
-          <li class="px-3 nav-item">
-            <a class="nav-link" routerLink="/login" routerLinkActive="active-link">Login</a>
-          </li>
-          <li class="px-3 nav-item">
-            <button class="main-btn" routerLink="/register" routerLinkActive="active-link2">Sign-Up</button>
-          </li>
-        </ng-container>
-        <ng-template #loggedInTemplate>
+        <ng-container *ngIf="authService.isAuthenticated(); else loggedOutTemplate">
           <li class="px-3 nav-item dropdown">
             <a class="nav-link" href="#" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="profile-icon bi bi-person-circle"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
               <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+              <li *ngIf="isAdmin"><a class="dropdown-item" routerLink="/admin">Admin</a></li>
               <li><a class="dropdown-item" href="#" (click)="logout()">Sign Out</a></li>
             </ul>
+          </li>
+        </ng-container>
+        <ng-template #loggedOutTemplate>
+          <li class="px-3 nav-item">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active-link">Login</a>
+          </li>
+          <li class="px-3 nav-item">
+            <button class="main-btn" routerLink="/register" routerLinkActive="active-link2">Sign-Up</button>
           </li>
         </ng-template>
       </ul>

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import {InjectRepository} from "@nestjs/typeorm";
-import {Repository} from "typeorm";
-import {JwtService} from "@nestjs/jwt";
-import {User} from "../user/entities/user.entity";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { JwtService } from "@nestjs/jwt";
+import { User } from "../user/entities/user.entity";
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -14,36 +14,33 @@ export class AuthService {
     ) {}
 
     /**
-     * Hier wordt gecontroleerd bij de ticketbooth of je zegt wie je bent dat je bent
+     * Validate user credentials
      * @param username
      * @param pass
      */
     async validateUser(username: string, pass: string): Promise<any> {
-
-        //Dit is als de vrouw achter de balie die je naam opzoekt in het registratiesboek
         const user = await this.userRepository.findOne({ where: { username } });
-        console.log(username, pass)
-        //Als hij de naam gevonden checkt hij hier of het wachtwoord klopt. Zou je kunnen zien als controleren of het gezicht
-        //op de ID hetzelfde is als in het echt. Als alles klopt, geeft hij het result zonder gevoelige informatie zoals wachtwoord
+        console.log('Found user:', user); // New log
+
         if (user && await bcrypt.compare(pass, user.password)) {
             const { password, ...result } = user;
+            console.log('Validated user:', result); // New log
             return result;
         }
-        console.log("validate user niet gelukt")
+        console.log("Validate user not successful");
         return null;
-
     }
 
     /**
-     * Login method. Hier wordt de armband afgegeven. De payload moet je zien als de details van het armbandje
-     * waar informatie opstaat zoals de username en id.
+     * Login method. Creates and returns a JWT token.
      * @param user
      */
     async login(user: any) {
-        const payload = { username: user.username, sub: user.id};
+        console.log('User object in login:', user); // New log
+        const payload = { username: user.username, rank: user.rank, sub: user.id };
+        console.log('Payload for JWT:', payload); // New log
         return {
             access_token: this.jwtService.sign(payload),
         };
     }
 }
-
