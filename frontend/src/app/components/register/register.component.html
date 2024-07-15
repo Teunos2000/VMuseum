@@ -18,8 +18,8 @@
             <img #image [src]="croppingImageUrl" alt="Image to crop">
           </div>
           <div *ngIf="isCropping" class="cropper-controls">
-            <button type="button" (click)="cropImage()">Save</button>
-            <button type="button" (click)="cancelCrop()">Cancel</button>
+            <button class="adaptive-button" type="button" (click)="cropImage()">Save</button>
+            <button class="adaptive-button" type="button" (click)="cancelCrop()">Cancel</button>
           </div>
           <div class="form-group">
             <input type="text" id="username" [(ngModel)]="username" name="username" required

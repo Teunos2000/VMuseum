@@ -6,6 +6,33 @@
   min-height: 100vh;
   padding: 5vh 0;
 }
+
+.account {
+  position: relative;
+  padding-right: 20px;
+}
+
+.account::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 1px;
+  height: 80lvh;
+  background-color: #0b1117;
+}
+
+.activity {
+  position: relative;
+}
+.activity::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 80lvh;
+  background-color: #0b1117;
+}
+
 .account, .collection, .activity {
   display: flex;
   flex-direction: column;
@@ -98,8 +125,8 @@ h5 {
 }
 
 .profileforms {
-  width: 300px; /* Optional: Set the width of the form */
-  margin: 0 auto; /* Optional: Center the form on the page */
+  width: 300px;
+  margin: 0 auto;
 }
 .profileforms form {
   display: flex;
@@ -109,8 +136,8 @@ h5 {
   margin-bottom: 10px;
   padding: 8px;
   font-size: 16px;
-  width: 100%; /* Ensures the input takes up the full width of its container */
-  box-sizing: border-box; /* Ensures padding is included in the element's total width */
+  width: 100%;
+  box-sizing: border-box;
 }
 .profileforms button {
   padding: 10px;
@@ -129,7 +156,17 @@ h5 {
     height: 120px;
   }
 
+  .account::after {
+    display: none;
+  }
+
   .line-input {
     width: 60vw;
+  }
+}
+
+@media (max-width: 1251px) {
+  .account::after {
+    display: none;
   }
 }
