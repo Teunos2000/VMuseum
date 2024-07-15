@@ -1,0 +1,21 @@
+main {
+  background: #EAE7DE;
+  min-height: 100vh;
+}
+
+* {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: #0b1117;
+}
+
+input, textarea, select {
+  margin-bottom: 1vh;
+}
+
+.textarea-description {
+  height: 12vh;
+}
+
+.room-admin {
+  padding-top: 5vh;
+}

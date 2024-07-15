@@ -1,1 +1,35 @@
-<p>admin works!</p>
+<main>
+  <div class="custom-container-fluid">
+    <div class="row">
+      <div class="col-xl-6">
+        <h4 class="room-admin">Room</h4>
+        <form class="d-grid gap-2">
+          <input type="text" placeholder="Room name" class="form-control">
+          <textarea class="textarea-description form-control" placeholder="Description"></textarea>
+          <input type="number" placeholder="Capacity" class="form-control">
+          <input type="text" placeholder="Subject (example: Greek Mythology)" class="form-control">
+          <input type="text" placeholder="Style (example: Sculpture)" class="form-control">
+          <p>Room photo:</p>
+          <input id="roomphoto" type="file" class="form-control">
+          <button class="main-btn">Submit</button>
+        </form>
+      </div>
+
+      <div class="mt-5 col-xl-1 d-flex justify-content-center align-items-center">
+        <div style="border-left: 1px solid #000; height: 100%;"></div>
+      </div>
+
+      <div class="col-xl-5">
+        <h4 class="room-admin">Painting</h4>
+        <form class="d-grid gap-2">
+          <input type="text" placeholder="Painting name" class="form-control">
+          <textarea class="textarea-description form-control" placeholder="Description"></textarea>
+          <input type="text" placeholder="Room it belongs to" class="form-control">
+          <p>Painting photo:</p>
+          <input id="paintingphoto" type="file" class="form-control">
+          <button class="main-btn">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
