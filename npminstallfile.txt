@@ -32,7 +32,8 @@ $ npm install sweetalert2
 cropperjs (front end):
 $ npm install cropperjs
 
-
+Markdown (front end):
+$ npm install ngx-markdown
 
 
 testing (front end)

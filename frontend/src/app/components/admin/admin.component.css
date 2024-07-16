@@ -19,3 +19,15 @@ input, textarea, select {
 .room-admin {
   padding-top: 5vh;
 }
+
+.format-buttons {
+  margin-bottom: 10px;
+}
+
+.format-buttons button {
+  margin-right: 5px;
+}
+
+.textarea-description {
+  min-height: 150px;
+}
