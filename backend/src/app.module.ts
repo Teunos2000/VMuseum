@@ -5,10 +5,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
+import { Room } from './room/entities/room.entity';
 import { AuthModule } from './auth/auth.module';
-import {AuthController} from "./auth/auth.controller";
-import {ScheduleModule} from "@nestjs/schedule";
-import {StaticFilesModule} from "./static-files.module";
+import { AuthController } from './auth/auth.controller';
+import { ScheduleModule } from '@nestjs/schedule';
+import { StaticFilesModule } from './static-files.module';
+import { RoomModule } from './room/room.module';
+import { FileUploadService } from './file-upload-service';
 
 @Module({
   imports: [
@@ -22,15 +25,16 @@ import {StaticFilesModule} from "./static-files.module";
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [User],
-      synchronize: true, //Change to false in production
+      entities: [User, Room],
+      synchronize: true, // Change to false in production
     }),
     UserModule,
     AuthModule,
     StaticFilesModule,
-    ScheduleModule.forRoot() //For sending pings to db
+    ScheduleModule.forRoot(),
+    RoomModule,
   ],
   controllers: [AppController, AuthController],
-  providers: [AppService],
+  providers: [AppService, FileUploadService],
 })
 export class AppModule {}
