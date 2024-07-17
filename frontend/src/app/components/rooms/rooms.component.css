@@ -1,0 +1,10 @@
+
+.row .col-lg-4, .row .col-md-6, .row .col-12 {
+  padding: 8px; /* Adjust the gap as needed */
+}
+
+.img-fluid {
+  width: 100%;
+  height: auto;
+  display: block;
+}

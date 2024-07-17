@@ -64,7 +64,7 @@ export class RoomService {
   }
 
   findAll() {
-    return `This action returns all room`;
+    return this.roomRepository.find();
   }
 
   findOne(id: number) {

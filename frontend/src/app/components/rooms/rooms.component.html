@@ -1,0 +1,10 @@
+<div class="custom-container-fluid">
+<h5 class="pt-5">Display rooms:</h5>
+<div class="mt-2">
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-12" *ngFor="let room of rooms">
+      <img class="img-fluid" [src]="room.picture" [alt]="room.name">
+    </div>
+  </div>
+</div>
+</div>

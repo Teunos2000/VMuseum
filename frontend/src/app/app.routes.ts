@@ -7,11 +7,13 @@ import {ProfileComponent} from "./components/profile/profile.component";
 import {AuthGuard} from "./auth/auth.guard";
 import {AdminComponent} from "./components/admin/admin.component";
 import {AdminGuard} from "./components/admin/admin.guard";
+import {RoomsComponent} from "./components/rooms/rooms.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'rooms', component: RoomsComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route to home

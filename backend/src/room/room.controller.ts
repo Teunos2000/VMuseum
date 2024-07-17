@@ -20,17 +20,18 @@ import {extname} from "path";
 import {diskStorage} from "multer";
 
 @Controller('room')
-@UseGuards(JwtAuthGuard, AdminGuard)
 export class RoomController {
   constructor(private readonly roomService: RoomService) {}
 
   @Post()
+  @UseGuards(JwtAuthGuard, AdminGuard)
   create(@Body() createRoomDto: CreateRoomDto) {
     return this.roomService.create(createRoomDto);
   }
 
 
   @Post(':id/upload-picture')
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @UseInterceptors(
       FileInterceptor('file', {
         storage: diskStorage({
@@ -57,6 +58,7 @@ export class RoomController {
   }
 
   @Post(':id/upload-music')
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @UseInterceptors(
       FileInterceptor('file', {
         storage: diskStorage({
@@ -76,6 +78,7 @@ export class RoomController {
   }
 
   @Post(':id/upload-voiceover')
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @UseInterceptors(
       FileInterceptor('file', {
         storage: diskStorage({
@@ -88,6 +91,7 @@ export class RoomController {
             cb(null, `${randomName}${extname(file.originalname)}`);
           },
         }),
+
       }),
   )
   async uploadVoiceover(@Param('id') id: number, @UploadedFile() file: Express.Multer.File) {
@@ -106,11 +110,13 @@ export class RoomController {
   }
 
   @Patch(':id')
+  @UseGuards(JwtAuthGuard, AdminGuard)
   update(@Param('id') id: string, @Body() updateRoomDto: UpdateRoomDto) {
     return this.roomService.update(+id, updateRoomDto);
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard, AdminGuard)
   remove(@Param('id') id: string) {
     return this.roomService.remove(+id);
   }
