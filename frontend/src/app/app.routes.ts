@@ -6,7 +6,7 @@ import {RegisterComponent} from "./components/register/register.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {AuthGuard} from "./auth/auth.guard";
 import {AdminComponent} from "./components/admin/admin.component";
-import {AdminGuard} from "./auth/admin.guard";
+import {AdminGuard} from "./components/admin/admin.guard";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },

@@ -1,22 +1,18 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-import { UserService } from './user.service';
+import { Reflector } from '@nestjs/core';
 
-/**
- * Class to check for the admin rank
- */
 @Injectable()
 export class AdminGuard implements CanActivate {
-    constructor(private userService: UserService) {}
+    constructor(private reflector: Reflector) {}
 
-    async canActivate(context: ExecutionContext): Promise<boolean> {
+    canActivate(context: ExecutionContext): boolean {
         const request = context.switchToHttp().getRequest();
         const user = request.user;
 
-        if(user && user.id) {
-            const userDetails = await this.userService.findOne(user.id);
-            return userDetails && userDetails.rank === 2;
+        if (!user) {
+            return false;
         }
 
-        return false;
+        return user.rank === 2;
     }
 }

@@ -1,23 +1,29 @@
 <main>
   <div class="custom-container-fluid">
     <div class="row">
-      <div class="col-xl-6">
-        <h4 class="room-admin">Room</h4>
-        <form class="d-grid gap-2">
-          <input type="text" placeholder="Room name" class="form-control">
-          <textarea [(ngModel)]="roomDescription" class="textarea-description form-control" placeholder="Description"></textarea>
-          <input type="number" placeholder="Capacity" class="form-control">
-          <input type="text" placeholder="Subject (example: Greek Mythology)" class="form-control">
-          <input type="text" placeholder="Style (example: Sculpture)" class="form-control">
-          <p>Room photo:</p>
-          <input id="roomphoto" type="file" class="form-control">
-          <p>Room music/bg sound:</p>
-          <input id="roommusic" type="file" class="form-control">
-          <p>Room voice over:</p>
-          <input id="roomvoice" type="file" class="form-control">
-          <button class="main-btn" (click)="submitRoom()">Submit</button>
-        </form>
-      </div>
+
+        <div class="col-xl-6">
+          <h4 class="room-admin">Room</h4>
+
+          <form class="d-grid gap-2" (ngSubmit)="submitRoom()">
+            <input [(ngModel)]="roomName" name="roomName" type="text" placeholder="Room name" class="form-control">
+            <textarea [(ngModel)]="roomDescription" name="roomDescription" class="textarea-description form-control" placeholder="Description"></textarea>
+            <input [(ngModel)]="roomCapacity" name="roomCapacity" type="number" placeholder="Capacity" class="form-control">
+            <input [(ngModel)]="roomSubject" name="roomSubject" type="text" placeholder="Subject (example: Greek Mythology)" class="form-control">
+            <input [(ngModel)]="roomStyle" name="roomStyle" type="text" placeholder="Style (example: Sculpture)" class="form-control">
+
+            <p>Room photo:</p>
+            <input id="roomphoto" type="file" (change)="onFileChange($event, 'picture')" class="form-control">
+
+            <p>Room music/bg sound:</p>
+            <input id="roommusic" type="file" (change)="onFileChange($event, 'music')" class="form-control">
+
+            <p>Room voice over:</p>
+            <input id="roomvoice" type="file" (change)="onFileChange($event, 'voiceover')" class="form-control">
+
+            <button type="submit" class="main-btn">Submit</button>
+          </form>
+        </div>
 
       <div class="mt-5 col-xl-1 d-flex justify-content-center align-items-center">
         <div style="border-left: 1px solid #000; height: 100%;"></div>

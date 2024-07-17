@@ -8,7 +8,7 @@ export class Room {
     @Column({ length: 45 })
     name: string;
 
-    @Column({ length: 200 })
+    @Column('text')
     description: string;
 
     @Column()
