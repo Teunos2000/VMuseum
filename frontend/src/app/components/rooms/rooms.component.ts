@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Room } from './room.model';
 import { RoomService } from "./room.service";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'rooms',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.css'
 })

@@ -10,7 +10,13 @@ export class RoomService {
 
   constructor(private http: HttpClient) {}
 
+  //Fetches all rooms
   getRooms(): Observable<Room[]> {
     return this.http.get<Room[]>(this.apiUrl);
+  }
+
+  //Fetches a single room based on given ID
+  getRoom(id: number): Observable<Room> {
+    return this.http.get<Room>(`${this.apiUrl}/${id}`);
   }
 }

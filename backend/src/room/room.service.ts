@@ -67,8 +67,12 @@ export class RoomService {
     return this.roomRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} room`;
+  async findOne(id: number): Promise<Room> {
+    const room = await this.roomRepository.findOne({ where: { id } });
+    if (!room) {
+      throw new NotFoundException(`Room with ID ${id} not found`);
+    }
+    return room;
   }
 
   update(id: number, updateRoomDto: UpdateRoomDto) {

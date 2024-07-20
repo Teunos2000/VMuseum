@@ -1,0 +1,12 @@
+<div *ngIf="room.name">
+  <h2>{{ room.name }}</h2>
+  <img [src]="room.picture" [alt]="room.name" class="img-fluid">
+  <p>{{ room.description }}</p>
+  <p>Capacity: {{ room.capacity }}</p>
+  <p>Subject: {{ room.subject }}</p>
+  <p>Style: {{ room.style }}</p>
+
+  <audio #audioPlayer *ngIf="musicURL" [src]="musicURL" controls>
+    Your browser does not support the audio element.
+  </audio>
+</div>
