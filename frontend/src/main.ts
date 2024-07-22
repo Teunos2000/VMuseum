@@ -7,6 +7,7 @@ import { MarkdownModule, MARKED_OPTIONS } from 'ngx-markdown';
 
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -27,6 +28,6 @@ bootstrapApplication(AppComponent, {
           },
         },
       })
-    ),
+    ), provideAnimationsAsync(),
   ]
 }).catch(err => console.error(err));

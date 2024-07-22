@@ -22,6 +22,19 @@ p {
   width: 30vw;
 }
 
+.custom-snackbar {
+  background-color: #EEEAE4;
+  position: fixed !important;
+  bottom: 80px !important;
+  left: 20px !important;
+}
+
+.custom-snackbar .mat-simple-snackbar {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+
 /*Tablet*/
 @media (max-width: 1028px) {
   h1 {

@@ -1,0 +1,8 @@
+<div class="sound-control">
+  <div class="sound-icon" (click)="toggleMute()">
+    <i class="bi" [ngClass]="{'bi-volume-mute-fill': isMuted, 'bi-volume-up-fill': !isMuted}"></i>
+  </div>
+  <div class="volume-control">
+    <input type="range" class="form-range" min="0" max="100" [value]="volume" (input)="onVolumeChange($event)">
+  </div>
+</div>

@@ -6,7 +6,8 @@
   <p>Subject: {{ room.subject }}</p>
   <p>Style: {{ room.style }}</p>
 
-  <audio #audioPlayer *ngIf="musicURL" [src]="musicURL" controls>
+
+  <audio #audioPlayer *ngIf="musicURL" [src]="musicURL" [hidden]="true">
     Your browser does not support the audio element.
   </audio>
 </div>

@@ -45,7 +45,7 @@ export class RoomController {
           },
         }),
         fileFilter: (req, file, cb) => {
-          if (!file.mimetype.match(/\/(jpg|jpeg|png)$/)) {
+          if (!file.mimetype.match(/\/(jpg|jpeg|png|webp)$/)) {
             cb(new BadRequestException('Only JPG, JPEG, and PNG files are allowed!'), false);
           } else {
             cb(null, true);

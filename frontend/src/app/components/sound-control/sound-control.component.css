@@ -1,0 +1,39 @@
+.sound-control {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+}
+
+.sound-icon {
+  width: 3vw;
+  height: 3vw;
+  border-radius: 50%;
+  background-color: #8ED9E9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  i {
+    font-size: 28px;
+  }
+}
+
+.volume-control {
+  width: 0;
+  overflow: hidden;
+  transition: width 0.3s ease;
+}
+
+.sound-control:hover .volume-control {
+  width: 100px;
+  margin-left: 10px;
+}
+
+.form-range {
+  width: 100px;
+}
