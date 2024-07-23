@@ -1,11 +1,16 @@
 <div *ngIf="room.name">
-  <h2>{{ room.name }}</h2>
-  <img [src]="room.picture" [alt]="room.name" class="img-fluid">
-  <p>{{ room.description }}</p>
-  <p>Capacity: {{ room.capacity }}</p>
-  <p>Subject: {{ room.subject }}</p>
-  <p>Style: {{ room.style }}</p>
-
+  <img [src]="room.picture" [alt]="room.name" class="intro-picture img-fluid">
+  <div class="black-overlay"></div>
+  <div class="content">
+    <p class="room-description">{{ room.description }}</p>
+    <p class="room-details">Capacity: {{ room.capacity }}</p>
+    <p class="room-details">Subject: {{ room.subject }}</p>
+    <p class="room-details">Style: {{ room.style }}</p>
+    <h6>Muziek ietsjes harder maken</h6>
+  </div>
+  <a [routerLink]="['/room/', room.id]" class="continue-button details-link">Enter Room
+    <i class="bi bi-arrow-right"></i>
+  </a>
 
   <audio #audioPlayer *ngIf="musicURL" [src]="musicURL" [hidden]="true">
     Your browser does not support the audio element.

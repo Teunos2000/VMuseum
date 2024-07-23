@@ -6,11 +6,13 @@ import { ActivatedRoute } from "@angular/router";
 import { switchMap } from 'rxjs/operators';
 import { AudioService } from '../sound-control/audio.service';
 import { Subscription } from 'rxjs';
+import {RouterLink} from "@angular/router";
+
 
 @Component({
   selector: 'app-room-intro',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, RouterLink],
   templateUrl: './room-intro.component.html',
   styleUrls: ['./room-intro.component.css']
 })

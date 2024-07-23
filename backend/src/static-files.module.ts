@@ -5,7 +5,7 @@ import { join } from 'path';
 @Module({
     imports: [
         ServeStaticModule.forRoot({
-            rootPath: join(__dirname, '..', 'uploads'), // Adjust the path as necessary
+            rootPath: join(__dirname, '..', 'uploads'),
             serveRoot: '/uploads', // Route to serve static files
         }),
     ],

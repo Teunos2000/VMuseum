@@ -2,18 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Room } from './room.model';
 import { RoomService } from "./room.service";
-import {RouterLink} from "@angular/router";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'rooms',
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './rooms.component.html',
-  styleUrl: './rooms.component.css'
+  styleUrls: ['./rooms.component.css']
 })
 export class RoomsComponent implements OnInit {
   rooms: Room[] = [];
   backendUrl = 'http://localhost:3000';
+  hoveredRoom: number | null = null;
 
   constructor(private roomService: RoomService) {}
 
@@ -32,5 +33,9 @@ export class RoomsComponent implements OnInit {
       },
       error: (err) => console.error('Failed to load rooms', err)
     });
+  }
+
+  onRoomHover(roomId: number | null) {
+    this.hoveredRoom = roomId;
   }
 }

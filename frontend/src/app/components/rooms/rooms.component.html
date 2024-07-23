@@ -2,10 +2,19 @@
   <h5 class="pt-5">Display rooms:</h5>
   <div class="mt-2">
     <div class="row">
-      <div class="col-lg-4 col-md-6 col-12" *ngFor="let room of rooms">
-        <a [routerLink]="['/roomintro', room.id]">
-          <img class="img-fluid" [src]="room.picture" [alt]="room.name">
-        </a>
+      <div class="col-lg-4 col-md-6 col-12 mb-4" *ngFor="let room of rooms">
+        <div class="room-item position-relative overflow-hidden"
+             [class.hovered]="hoveredRoom === room.id"
+             (mouseenter)="onRoomHover(room.id)"
+             (mouseleave)="onRoomHover(null)">
+          <a [routerLink]="['/roomintro', room.id]" class="d-block">
+            <img class="img-fluid w-100 h-auto" [src]="room.picture" [alt]="room.name">
+            <div class="room-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+                 [class.active]="hoveredRoom === room.id">
+              <span class="room-name text-white fs-4 fw-bold">{{room.name}}</span>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </div>
