@@ -6,7 +6,8 @@ import { ActivatedRoute } from "@angular/router";
 import { switchMap } from 'rxjs/operators';
 import { AudioService } from '../sound-control/audio.service';
 import { Subscription } from 'rxjs';
-import {RouterLink} from "@angular/router";
+import {RouterLink} from "@angular/router"
+import {Location} from '@angular/common';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class RoomIntroComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private roomService: RoomService,
-    private audioService: AudioService
+    private audioService: AudioService,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -60,5 +62,10 @@ export class RoomIntroComponent implements OnInit, OnDestroy {
 
   private loadRoomDetails(id: number) {
     return this.roomService.getRoom(id);
+  }
+
+
+  goBack() {
+    this.location.back();
   }
 }
