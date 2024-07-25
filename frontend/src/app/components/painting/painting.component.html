@@ -1,0 +1,11 @@
+<div class="paintings-container">
+  <h2>Paintings in this Room</h2>
+  <div class="paintings-grid">
+    <div *ngFor="let painting of paintings" class="painting-card">
+      <img [src]="painting.picture" [alt]="painting.name" class="painting-image">
+      <h3>{{ painting.name }}</h3>
+      <p>{{ painting.description }}</p>
+      <p>Views: {{ painting.views }}</p>
+    </div>
+  </div>
+</div>

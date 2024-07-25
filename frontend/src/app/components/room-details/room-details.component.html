@@ -1,9 +1,25 @@
 <main>
   <div class="custom-container-fluid pt-5">
-      <div class="row w-100">
-        <a (click)="goBack()" routerLink="/" class="back-button">
-          <i class="bi-arrow-left back-button"></i> Terug | {{ currentPath }}
-        </a>
-     </div>
+    <div class="row w-100 pb-2">
+      <a (click)="goBack()" routerLink="/" class="back-button">
+        <i class="bi-arrow-left back-button"></i> Terug | {{ currentPath }}
+      </a>
+    </div>
+    <div class="row">
+      <div class="col-md-4 room-details-column">
+        <h1 class="room-name">{{ room.name }}</h1>
+        <img [src]="room.picture" alt="{{ room.name }}" class="room-image">
+        <p class="room-description">{{ room.description }}</p>
+        <hr class="divider">
+        <div class="room-stats">
+          <p>Capacity: <u>{{ room.capacity }}</u></p>
+          <p>Subject: <u>{{ room.subject }}</u></p>
+          <p>Style: <u>{{ room.style }}</u></p>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <paintings [roomId]="room.id"/>
+      </div>
+    </div>
   </div>
 </main>

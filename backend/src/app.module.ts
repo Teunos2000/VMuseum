@@ -12,6 +12,8 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { StaticFilesModule } from './static-files.module';
 import { RoomModule } from './room/room.module';
 import { FileUploadService } from './file-upload-service';
+import { PaintingModule } from './painting/painting.module';
+import {Painting} from "./painting/entities/painting.entity";
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { FileUploadService } from './file-upload-service';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [User, Room],
+      entities: [User, Room, Painting],
       synchronize: true, // Change to false in production
     }),
     UserModule,
@@ -33,6 +35,7 @@ import { FileUploadService } from './file-upload-service';
     StaticFilesModule,
     ScheduleModule.forRoot(),
     RoomModule,
+    PaintingModule,
   ],
   controllers: [AppController, AuthController],
   providers: [AppService, FileUploadService],

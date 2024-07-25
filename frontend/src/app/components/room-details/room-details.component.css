@@ -7,3 +7,42 @@ main {
   text-decoration: none;
   color: #0B1117;
 }
+
+
+.room-details-column {
+  border-right: 1px solid #ccc;
+  padding-right: 15px;
+}
+
+.room-name {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.room-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.room-description {
+  margin-bottom: 1rem;
+}
+
+.divider {
+  border-top: 1px solid #ccc;
+  margin: 1rem 0;
+}
+
+.room-stats p {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 767px) {
+  .room-details-column {
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
+}

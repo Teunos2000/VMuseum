@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from 'typeorm';
+import {Painting} from "../../painting/entities/painting.entity";
 
 @Entity('Room')
 export class Room {
@@ -28,4 +29,7 @@ export class Room {
 
     @Column({ length: 200, nullable: true })
     voiceover: string;
+
+    @OneToMany(() => Painting, painting => painting.room)
+    paintings: Painting[];
 }
