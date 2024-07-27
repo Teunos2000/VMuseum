@@ -15,6 +15,8 @@ import {NgForOf} from "@angular/common";
 export class PaintingsComponent implements OnChanges {
   @Input() roomId?: number;
   paintings: Painting[] = [];
+  backendUrl = 'http://localhost:3000';  // Add this line
+
 
   constructor(private paintingService: PaintingService) {}
 
@@ -27,17 +29,19 @@ export class PaintingsComponent implements OnChanges {
   loadPaintings() {
     if (this.roomId === undefined || isNaN(this.roomId) || this.roomId <= 0) {
       console.error('Invalid room ID:', this.roomId);
-      return; // Exit the function if roomId is invalid
+      return;
     }
 
     this.paintingService.getPaintingsByRoom(this.roomId).subscribe({
       next: (data) => {
         console.log('Paintings loaded:', data);
-        this.paintings = data;
+        this.paintings = data.map(painting => ({
+          ...painting,
+          picture: painting.picture ? `${this.backendUrl}${painting.picture}` : ''
+        }));
       },
       error: (err) => {
         console.error('Failed to load paintings:', err);
-        // You might want to set an error flag or message here to display to the user
       }
     });
   }

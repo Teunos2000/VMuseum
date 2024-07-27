@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit{
   // Room
   roomName: string = '';
   roomDescription: string = '';
@@ -26,9 +26,36 @@ export class AdminComponent {
   roomVoiceover: File | null = null;
 
   // Painting
+  paintingName: string = '';
   paintingDescription: string = '';
+  selectedRoomId: number | null = null;
+  paintingPicture: File | null = null;
+
+  //Array for rooms
+  rooms: any[] = [];
 
   constructor(private adminService: AdminService, private router: Router) {}
+
+  ngOnInit() {
+    this.loadRooms();
+  }
+
+  loadRooms() {
+    this.adminService.getAllRooms().subscribe({
+      next: (rooms) => {
+        this.rooms = rooms;
+      },
+      error: (error) => {
+        console.error('Error loading rooms', error);
+        customSwal({
+          icon: 'error',
+          title: 'Error Loading Rooms',
+          text: 'There was an error loading the rooms. Please try again.',
+          confirmButtonText: 'Okay'
+        });
+      }
+    });
+  }
 
   onFileChange(event: any, fileType: 'picture' | 'music' | 'voiceover') {
     const file = event.target.files[0];
@@ -147,7 +174,92 @@ export class AdminComponent {
   }
 
   /** Painting code */
-  submitPainting() {}
+  onPaintingFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.paintingPicture = file;
+    }
+  }
+
+  submitPainting() {
+    if (this.selectedRoomId === null) {
+      customSwal({
+        icon: 'error',
+        title: 'Room Selection Required',
+        text: 'Please select a room for the painting.',
+        confirmButtonText: 'Okay'
+      });
+      return;
+    }
+
+    const paintingData = {
+      name: this.paintingName,
+      description: this.paintingDescription,
+      Room_id: this.selectedRoomId,
+      views: 0 // Initialize views to 0
+    };
+
+    this.adminService.createPainting(paintingData).subscribe({
+      next: (painting) => {
+        console.log('Painting created successfully', painting);
+        if (this.paintingPicture) {
+          this.uploadPaintingPicture(painting.id);
+        } else {
+          this.resetPaintingForm();
+          customSwal({
+            icon: 'success',
+            title: 'Painting Created Successfully!',
+            text: 'Painting created without a picture.',
+            confirmButtonText: 'Great!'
+          });
+        }
+      },
+      error: (error) => {
+        console.error('Error creating painting', error);
+        customSwal({
+          icon: 'error',
+          title: 'Error Creating Painting',
+          text: 'There was an error creating the painting. Please try again.',
+          confirmButtonText: 'Okay'
+        });
+      }
+    });
+  }
+
+  uploadPaintingPicture(paintingId: number) {
+    if (this.paintingPicture && this.isValidFile(this.paintingPicture)) {
+      this.adminService.uploadPaintingPicture(paintingId, this.paintingPicture).subscribe({
+        next: (result) => {
+          console.log('Painting picture uploaded successfully', result);
+          this.resetPaintingForm();
+          customSwal({
+            icon: 'success',
+            title: 'Painting Created Successfully!',
+            text: 'Painting and picture uploaded successfully.',
+            confirmButtonText: 'Great!'
+          });
+        },
+        error: (error) => {
+          console.error('Error uploading painting picture', error);
+          customSwal({
+            icon: 'error',
+            title: 'Error Uploading Painting Picture',
+            text: 'There was an error uploading the painting picture. Please try again.',
+            confirmButtonText: 'Okay'
+          });
+        }
+      });
+    }
+  }
+
+  resetPaintingForm() {
+    this.paintingName = '';
+    this.paintingDescription = '';
+    this.selectedRoomId = null;
+    this.paintingPicture = null;
+    // Reset file input
+    (document.getElementById('paintingphoto') as HTMLInputElement).value = '';
+  }
 
   formatText(type: 'bold' | 'header' | 'list') {
     const textarea: HTMLTextAreaElement | null = document.querySelector('textarea[name="paintingDescription"]');

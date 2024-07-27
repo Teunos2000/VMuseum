@@ -53,6 +53,7 @@ export class RoomDetailsComponent implements OnInit {
     });
   }
 
+  //Gaat 2 stappen terug omdat je anders terug komt bij de room intro waarnaar je alleen terug kunt naar room details wat een oneindige loop veroorzaakt
   goBack(): void {
     this.location.historyGo(-2);
   }

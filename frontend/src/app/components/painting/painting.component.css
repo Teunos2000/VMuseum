@@ -1,18 +1,12 @@
-.paintings-container {
-  padding: 20px;
-}
 .paintings-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
 }
 .painting-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
   padding: 10px;
 }
 .painting-image {
-  width: 100%;
+  width: 15vw;
   height: auto;
-  border-radius: 8px;
 }

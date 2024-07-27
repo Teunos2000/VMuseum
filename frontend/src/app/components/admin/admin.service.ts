@@ -68,6 +68,32 @@ export class AdminService {
     return this.http.post(`${this.apiUrl}/room/${roomId}/upload-voiceover`, formData, { headers });
   }
 
+  createPainting(paintingData: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    return this.http.post(`${this.apiUrl}/painting`, paintingData, { headers });
+  }
+
+  uploadPaintingPicture(paintingId: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    return this.http.post(`${this.apiUrl}/painting/${paintingId}/upload-picture`, formData, { headers });
+  }
+
+  /**
+   * Fetches all rooms for the painting -> display room relation
+   */
+  getAllRooms(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    return this.http.get(`${this.apiUrl}/room`, { headers });
+  }
+
   /**
    * Retrieves the authentication token from local storage.
    * @returns The bearer token as a string.
@@ -76,4 +102,6 @@ export class AdminService {
     // Safely retrieve the token or return an empty string if not found
     return localStorage.getItem('token') || '';
   }
+
+
 }
