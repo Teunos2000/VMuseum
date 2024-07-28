@@ -1,7 +1,9 @@
 <div class="paintings-container">
-  <div class="paintings-grid">
-    <div *ngFor="let painting of paintings" class="painting-card">
-        <img [src]="painting.picture" [alt]="painting.name" class="painting-image">
+  <div class="row">
+    <div *ngFor="let painting of paintings" class="col-md-6 col-lg-3 mb-4">
+      <div class="painting-card">
+        <img [src]="painting.picture" [alt]="painting.name" class="painting-image img-fluid">
+      </div>
     </div>
   </div>
 </div>

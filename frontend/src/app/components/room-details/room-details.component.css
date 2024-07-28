@@ -8,7 +8,6 @@ main {
   color: #0B1117;
 }
 
-
 .room-details-column {
   border-right: 1px solid #ccc;
   padding-right: 15px;
@@ -20,8 +19,6 @@ main {
 }
 
 .room-image {
-  width: 100%;
-  height: auto;
   margin-bottom: 1rem;
 }
 
@@ -38,7 +35,11 @@ main {
   margin-bottom: 0.5rem;
 }
 
-@media (max-width: 767px) {
+.room-subject {
+  font-size: 24px;
+}
+
+@media (max-width: 991px) {
   .room-details-column {
     border-right: none;
     border-bottom: 1px solid #ccc;
